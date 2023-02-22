@@ -43,20 +43,20 @@
             <img src="images/icon-error.svg" alt="" class="image" id="img4">
             <p class="alert" id="alert4"></p>
           </div>
-          <button class="btn" onclick="validateForm()">CLAIM YOUR FREE TRIAL</button>
+          <button class="btn" onclick="validateForm(document.myForm.email)">CLAIM YOUR FREE TRIAL</button>
         </form>
         <div class="bottom-p"> <p>By clicking the button, you are agreeing to our <span> Terms and Services </span></p></div>
       </div>
     </div>
   </div>
   <script>
-   function validateForm() {
+   function validateForm(inputText) {
     event.preventDefault();
   let a = document.forms["myForm"]["fname"].value;
   let b = document.forms["myForm"]["lname"].value;
   let c = document.forms["myForm"]["email"].value;
   let d = document.forms["myForm"]["pass"].value;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (a === "") {
    document.getElementById("img1").style.display = "flex";
    document.getElementById("alert1").innerHTML = "First Name cannot be empty";
@@ -77,6 +77,13 @@
    document.getElementById("img4").style.display = "flex";
    document.getElementById("alert4").innerHTML = "Password cannot be empty";
    document.getElementById("pass").style.border = "1px solid red"
+  }
+
+  if(inputText.value.match(mailFormat)){
+    return true;
+  } else {
+    document.getElementById("alert3").innerHTML = "Looks like this is not an email";
+    return false;
   }
 }
 
